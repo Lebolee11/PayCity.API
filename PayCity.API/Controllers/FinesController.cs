@@ -33,12 +33,6 @@ public class FinesController : ControllerBase
     [HttpGet("view")]
     public IActionResult ViewFines()
     {
-        /*var fines = new[]
-        {
-            new { FineId = "F123", Description = "Speeding", Amount = 500.00, ImageUrl = "http://example.com/fine1.jpg" },
-            new { FineId = "F124", Description = "Illegal Parking", Amount = 300.00, ImageUrl = "http://example.com/fine2.jpg" }
-        };
-        return Ok(fines);*/
         return Ok(Fines.Values);
     }
     [HttpPost("pay")]

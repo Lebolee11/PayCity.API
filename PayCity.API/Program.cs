@@ -1,10 +1,9 @@
 using PayCity.API.Data;
 using Microsoft.EntityFrameworkCore;
-//using PayCity.API.Controllers;
 using PayCity.API.Services;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
