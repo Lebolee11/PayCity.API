@@ -1,13 +1,17 @@
 using PayCity.API.Data;
 using Microsoft.EntityFrameworkCore;
-using PayCity.API.Controllers;
+//using PayCity.API.Controllers;
 using PayCity.API.Services;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add EF Core
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services and controllers
 builder.Services.AddControllers();

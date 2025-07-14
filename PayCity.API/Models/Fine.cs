@@ -7,5 +7,8 @@ namespace PayCity.API.Models
         public decimal Amount { get; set; }
         public string ImageUrl { get; set; }
         public bool IsPaid { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

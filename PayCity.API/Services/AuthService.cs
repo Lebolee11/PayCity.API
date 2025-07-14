@@ -6,6 +6,7 @@ using System.Text;
 
 namespace PayCity.API.Services
 {
+    
     public class AuthService : IAuthService
     {
         private readonly AppDbContext _context;
@@ -15,27 +16,34 @@ namespace PayCity.API.Services
             _context = context;
         }
 
-        public Task<string?> LoginAsync(string email, string password)
+        public async Task<string?> LoginAsync(string email, string password)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null) return null;
+
+            var passwordHash = HashPassword(password);
+            if (user.PasswordHash != passwordHash) return null;
+
+            // For demo: return a dummy token
+            return "dummy-jwt-token";
         }
 
         public async Task<bool> RegisterAsync(RegisterRequest request)
         {
+            if (request.Password != request.ConfirmPassword)
+                return false; // Or throw a custom exception or return a specific error
+
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
                 return false;
 
             var passwordHash = HashPassword(request.Password);
-
 
             var user = new User
             {
                 Name = request.Name,
                 Surname = request.Surname,
                 Email = request.Email,
-                //Phone = request.Phone,
-                PasswordHash = passwordHash,
-                //TermsAccepted = request.TermsAccepted
+                PasswordHash = passwordHash
             };
 
             _context.Users.Add(user);
@@ -43,9 +51,15 @@ namespace PayCity.API.Services
             return true;
         }
 
-        public Task SendResetEmail(string email)
+        public Task<bool> RegistersAsync(RegisterRequest request)
         {
             throw new NotImplementedException();
+        }
+
+        public Task SendResetEmail(string email)
+        {
+            // For demo: pretend to send an email
+            return Task.CompletedTask;
         }
 
         private string HashPassword(string password)

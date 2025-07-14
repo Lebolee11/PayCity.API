@@ -19,8 +19,11 @@ namespace PayCity.API.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] PayCity.API.Models.RegisterRequest request)
         {
+            if (request.Password != request.ConfirmPassword)
+                return BadRequest(new { message = "Passwords do not match." });
+
             var result = await _authService.RegisterAsync(request);
             if (!result)
                 return BadRequest(new { message = "Email already exists." });
@@ -36,7 +39,7 @@ namespace PayCity.API.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] Microsoft.AspNetCore.Identity.Data.LoginRequest request)
         {
             var token = await _authService.LoginAsync(request.Email, request.Password);
             if (token == null) return Unauthorized();

@@ -9,5 +9,7 @@ namespace PayCity.API.Models
         public required string Phone { get; set; }
         public required string PasswordHash { get; set; }
         public bool TermsAccepted { get; set; }
+
+        public List<Fine> Fines { get; set; } = new();
     }
 }
