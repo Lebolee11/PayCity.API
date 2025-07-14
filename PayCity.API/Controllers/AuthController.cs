@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using PayCity.API.Controllers;
+using Microsoft.EntityFrameworkCore;
+using PayCity.API.Models;
+using PayCity.API.Services;
+using PayCity.API.Data;
 
 namespace PayCity.API.Controllers
 {
@@ -12,19 +16,16 @@ namespace PayCity.API.Controllers
         private readonly IAuthService _authService;
         public AuthController(IAuthService authService) => _authService = authService;
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
-        {
-            var token = await _authService.LoginAsync(request.Email, request.Password);
-            if (token == null) return Unauthorized();
-            return Ok(new { token });
-        }
+
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             var result = await _authService.RegisterAsync(request);
-            return result ? Ok(new { message = "Registration successful" }) : BadRequest();
+            if (!result)
+                return BadRequest(new { message = "Email already exists." });
+
+            return Ok(new { message = "Registration successful" });
         }
 
         [HttpPost("forgot-password")]
@@ -33,12 +34,30 @@ namespace PayCity.API.Controllers
             await _authService.SendResetEmail(request.Email);
             return Ok(new { message = "Password reset link sent" });
         }
+        
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            var token = await _authService.LoginAsync(request.Email, request.Password);
+            if (token == null) return Unauthorized();
+            return Ok(new { token });
+        }
+
+        [HttpGet("users")]
+public async Task<IActionResult> GetAllUsers([FromServices] AppDbContext context)
+{
+    var users = await context.Users.ToListAsync();
+    return Ok(users);
+}
+
+[HttpGet("users/{id}")]
+public async Task<IActionResult> GetUserById(int id, [FromServices] AppDbContext context)
+{
+    var user = await context.Users.FindAsync(id);
+    if (user == null) return NotFound();
+    return Ok(user);
+}
     }
 
-    public interface IAuthService
-    {
-        Task<string?> LoginAsync(string email, string password);
-        Task SendResetEmail(string email);
-        Task<bool> RegisterAsync(RegisterRequest request);
-    }
+    
 }

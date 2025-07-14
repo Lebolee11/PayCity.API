@@ -6,13 +6,18 @@ using System.Text;
 
 namespace PayCity.API.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly AppDbContext _context;
 
         public AuthService(AppDbContext context)
         {
             _context = context;
+        }
+
+        public Task<string?> LoginAsync(string email, string password)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> RegisterAsync(RegisterRequest request)
@@ -22,19 +27,25 @@ namespace PayCity.API.Services
 
             var passwordHash = HashPassword(request.Password);
 
+
             var user = new User
             {
                 Name = request.Name,
-               /* Surname = request.Surname,
+                Surname = request.Surname,
                 Email = request.Email,
-                Phone = request.Phone,
+                //Phone = request.Phone,
                 PasswordHash = passwordHash,
-                TermsAccepted = request.TermsAccepted*/
+                //TermsAccepted = request.TermsAccepted
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public Task SendResetEmail(string email)
+        {
+            throw new NotImplementedException();
         }
 
         private string HashPassword(string password)

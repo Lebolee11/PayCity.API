@@ -14,8 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // In Program.cs, inside the builder.Services section
-//builder.Services.AddScoped<IAuthService>();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+//builder.Services.AddScoped<AuthService>();
 
 
 var app = builder.Build();
