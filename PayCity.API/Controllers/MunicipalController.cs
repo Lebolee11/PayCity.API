@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PayCity.API.Controllers;
+using PayCity.API.Data;
 using PayCity.API.Models;
 
 namespace PayCity.API.Controllers

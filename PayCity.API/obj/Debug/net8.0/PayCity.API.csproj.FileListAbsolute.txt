@@ -8,6 +8,7 @@
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Azure.Core.dll
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Azure.Identity.dll
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Humanizer.dll
+/workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
 /workspaces/PayCity.API/PayCity.API/bin/Debug/net8.0/Microsoft.Build.Locator.dll

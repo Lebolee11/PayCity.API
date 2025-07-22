@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PayCity.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4140b80347c4ee507763e86a8c1b88968036575c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6fbd0edcc382150ac6a68143126d1a812eeeab3")]
 [assembly: System.Reflection.AssemblyProductAttribute("PayCity.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PayCity.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

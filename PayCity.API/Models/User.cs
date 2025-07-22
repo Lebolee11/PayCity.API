@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace PayCity.API.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public required string Name { get; set; }
         public required string Surname { get; set; }
         public required string Email { get; set; }

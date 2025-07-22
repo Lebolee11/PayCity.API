@@ -1,3 +1,4 @@
+
 namespace PayCity.API.Models
 {
     public class Fine
@@ -10,5 +11,7 @@ namespace PayCity.API.Models
 
         public int UserId { get; set; }
         public User User { get; set; }
+        public string Id { get; internal set; }
+        public DateTime CreatedAt { get; internal set; }
     }
 }

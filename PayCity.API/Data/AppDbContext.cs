@@ -9,5 +9,7 @@ namespace PayCity.API.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Fine> Fines { get; set; }
+        public object MunicipalAccounts { get; internal set; }
+        public object UtilityTokens { get; internal set; }
     }
 }
